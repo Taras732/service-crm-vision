@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Service CRM — Аналіз та бачення розвитку</title>
+<style>
+  :root{
+    --bg:#0d1117; --bg2:#161b22; --card:#1c2230; --card2:#222b3a;
+    --line:#2b3445; --txt:#e6edf3; --muted:#9aa7b8; --dim:#6b7888;
+    --accent:#38bdf8; --accent2:#34d399; --warn:#fbbf24; --danger:#f87171;
+    --grad:linear-gradient(135deg,#38bdf8,#34d399);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
+  /* HERO */
+  header{
+    background:radial-gradient(1200px 400px at 50% -100px,rgba(56,189,248,.15),transparent),var(--bg2);
+    border-bottom:1px solid var(--line);padding:54px 0 30px;text-align:center;
+  }
+  .badge{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);border:1px solid var(--line);border-radius:30px;padding:5px 14px;margin-bottom:18px;background:var(--card)}
+  header h1{font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:12px}
+  header h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  header p{color:var(--muted);font-size:17px;max-width:640px;margin:0 auto}
+  .meta{margin-top:18px;font-size:13px;color:var(--dim)}
+
+  /* TABS */
+  nav{position:sticky;top:0;z-index:50;background:rgba(13,17,23,.85);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line)}
+  .tabs{display:flex;gap:4px;overflow-x:auto;padding:10px 0;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{white-space:nowrap;background:transparent;border:1px solid transparent;color:var(--muted);
+    font-size:14px;font-weight:600;padding:9px 15px;border-radius:9px;cursor:pointer;transition:.18s;font-family:inherit}
+  .tab:hover{color:var(--txt);background:var(--card)}
+  .tab.active{color:#06121c;background:var(--grad);border-color:transparent}
+
+  /* SECTIONS */
+  main{padding:38px 0 70px;min-height:60vh}
+  .panel{display:none;animation:fade .35s ease}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  h2{font-size:27px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
+  .lead{color:var(--muted);font-size:16px;margin-bottom:26px;max-width:760px}
+  h3{font-size:18px;font-weight:700;margin:26px 0 12px;display:flex;align-items:center;gap:8px}
+
+  /* CARDS */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card.hl{background:linear-gradient(160deg,var(--card2),var(--card));border-color:#324155}
+  .stat{font-size:32px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1}
+  .stat-l{color:var(--muted);font-size:13.5px;margin-top:6px}
+  .card h4{font-size:15.5px;font-weight:700;margin-bottom:6px}
+  .card p{color:var(--muted);font-size:14px}
+
+  ul.clean{list-style:none}
+  ul.clean li{padding:8px 0 8px 26px;position:relative;color:var(--muted);font-size:14.5px;border-bottom:1px solid var(--line)}
+  ul.clean li:last-child{border-bottom:0}
+  ul.clean li::before{content:"";position:absolute;left:4px;top:15px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  ul.clean li b{color:var(--txt)}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}
+  th{color:var(--accent);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+  td{color:var(--muted)} td b{color:var(--txt)}
+  tr:hover td{background:var(--bg2)}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:20px}
+  .p-hi{background:rgba(52,211,153,.16);color:var(--accent2)}
+  .p-mid{background:rgba(251,191,36,.16);color:var(--warn)}
+  .p-lo{background:rgba(248,113,113,.16);color:var(--danger)}
+
+  .callout{border-left:3px solid var(--accent);background:var(--card);border-radius:0 12px 12px 0;padding:16px 20px;margin:20px 0;color:var(--muted);font-size:14.5px}
+  .callout b{color:var(--txt)}
+  .flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+  .flow .step{flex:1;min-width:150px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .flow .step .n{font-size:12px;color:var(--accent);font-weight:700}
+  .flow .step h4{font-size:14.5px;margin:4px 0}
+  .flow .step p{font-size:12.5px;color:var(--dim)}
+  .arrow{color:var(--accent);font-size:20px;font-weight:700}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;color:var(--dim);font-size:13px}
+
+  @media(max-width:780px){
+    header h1{font-size:30px}
+    .g2,.g3,.g4{grid-template-columns:1fr}
+    .flow{flex-direction:column}.arrow{transform:rotate(90deg)}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="badge">Аналіз ринку · Бачення розвитку · 2026</div>
+    <h1>Service CRM<br><span>з робочого продукту — у масштабоване рішення</span></h1>
+    <p>Вікторе, ваша платформа управління виїзним сервісом уже доведена на практиці. Цей документ — про ринок, потенціал і конкретні напрями розвитку для спільного обговорення.</p>
+    <div class="meta">Підготовлено для Віктора · Для обговорення · Конфіденційно</div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-t="ov">Огляд</button>
+      <button class="tab" data-t="mk">Ринок</button>
+      <button class="tab" data-t="cp">Конкуренти</button>
+      <button class="tab" data-t="vt">Вертикалі</button>
+      <button class="tab" data-t="ai">Автоматизація &amp; AI</button>
+      <button class="tab" data-t="ar">Архітектура</button>
+      <button class="tab" data-t="ds">Дизайн</button>
+      <button class="tab" data-t="nx">Наступні кроки</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- OVERVIEW -->
+  <section class="panel active" id="ov">
+    <h2>Можливість у двох реченнях</h2>
+    <p class="lead">Існує працююча платформа для виїзного сервісу з реальною історією експлуатації. Ринок таких рішень росте на AI, а в Україні якісних, сучасних, україномовних продуктів практично немає — це вікно, щоб з готового продукту зробити масштабоване рішення.</p>
+
+    <div class="grid g4">
+      <div class="card hl"><div class="stat">85K+</div><div class="stat-l">замовлень у системі — доведена практика, не концепт</div></div>
+      <div class="card hl"><div class="stat">$6,2 млрд</div><div class="stat-l">світовий ринок FSM-софту у 2026</div></div>
+      <div class="card hl"><div class="stat">10–16%</div><div class="stat-l">річний ріст ринку (CAGR)</div></div>
+      <div class="card hl"><div class="stat">78%</div><div class="stat-l">топ-гравців уже використовують AI</div></div>
+    </div>
+
+    <h3>🎯 Чому це цікаво саме зараз</h3>
+    <div class="grid g3">
+      <div class="card"><h4>Готовий фундамент</h4><p>Продукт уже покриває повний цикл: прийом → диспетчинг → виконання → інкасація → аналітика. Це роки роботи, які не треба повторювати.</p></div>
+      <div class="card"><h4>Порожня ніша в Україні</h4><p>Локальні рішення застарілі, російськомовні та без AI. Західні — дорогі й не локалізовані. Між ними — вільне місце.</p></div>
+      <div class="card"><h4>Хвиля AI</h4><p>Ринок росте саме завдяки AI. Накласти інтелект на вже зібрані дані — найкоротший шлях до сучасного продукту.</p></div>
+    </div>
+
+    <div class="callout"><b>Суть пропозиції для обговорення:</b> поєднати ваш доведений продукт, Вікторе, із сучасною автоматизацією, AI та локалізацією — і визначити разом, як його можна розвивати (від покращення поточної системи до окремого рішення для інших компаній).</div>
+  </section>
+
+  <!-- MARKET -->
+  <section class="panel" id="mk">
+    <h2>Ринок</h2>
+    <p class="lead">Field Service Management (FSM) — софт для управління виїзним персоналом. Стабільно зростаючий сегмент, головний драйвер 2026 року — штучний інтелект.</p>
+
+    <div class="grid g3">
+      <div class="card"><div class="stat">$6,2 млрд → $23,6 млрд</div><div class="stat-l">світовий ринок: 2026 → прогноз 2035</div></div>
+      <div class="card"><div class="stat">$1,89 млрд</div><div class="stat-l">ринок Європи (2026), ріст ~9–12%/рік</div></div>
+      <div class="card"><div class="stat">~$475</div><div class="stat-l">середня вартість одного «зайвого» виїзду, який усуває AI-диспетчинг</div></div>
+    </div>
+
+    <h3>📈 Головні тренди 2026</h3>
+    <ul class="clean">
+      <li><b>AI-диспетчинг.</b> Система сама підбирає виконавця за навичками, локацією, завантаженням і вікном клієнта → вищий відсоток вирішення з першого виїзду.</li>
+      <li><b>Автономність зростає.</b> Прогноз галузі: до 2028 рутинні замовлення плануватимуться без участі диспетчера — людина лише на винятках.</li>
+      <li><b>Прогнозна аналітика.</b> Передбачення попиту, завантаження, потреби в обслуговуванні.</li>
+      <li><b>Mobile-first.</b> Окремий інтерфейс виконавця (заявки, фото, статуси, геолокація) став стандартом.</li>
+    </ul>
+
+    <h3>🇺🇦 Контекст України</h3>
+    <div class="grid g2">
+      <div class="card"><h4>Сприятливе</h4><p>1,8 млн ФОП, сектор послуг росте (+15% реєстрацій). Дерусифікація створює попит саме на україномовні рішення. Хмарні сервіси — норма.</p></div>
+      <div class="card"><h4>Що враховувати</h4><p>Нижча купівельна спроможність → потрібна локальна ціна. Окремі сегменти (напр., ремонт побутових речей) стагнують, тоді як інші ростуть — це впливає на вибір першого ринку.</p></div>
+    </div>
+  </section>
+
+  <!-- COMPETITORS -->
+  <section class="panel" id="cp">
+    <h2>Конкурентний ландшафт</h2>
+    <p class="lead">Два чіткі полюси: дорогі західні платформи та дешеві, але застарілі локальні. Між ними — незайнятий простір «сучасно + локально + доступно».</p>
+
+    <h3>🌍 Західні платформи</h3>
+    <table>
+      <tr><th>Продукт</th><th>Ціна</th><th>Для кого</th><th>AI</th></tr>
+      <tr><td><b>ServiceTitan</b></td><td>$300–500/тех/міс + setup $5–50K</td><td>Великі мережі</td><td>Так</td></tr>
+      <tr><td><b>Jobber</b></td><td>$39–599/міс + add-ons</td><td>Малий/середній бізнес</td><td>Так (+$99 AI)</td></tr>
+      <tr><td><b>Housecall Pro</b></td><td>$59–329/міс</td><td>Малі (&lt;15 тех)</td><td>Частково</td></tr>
+      <tr><td><b>ServiceM8 / Workiz</b></td><td>$29–349/міс</td><td>Мікро/малі</td><td>Частково</td></tr>
+    </table>
+
+    <h3>🏠 Локальні (Україна / СНД)</h3>
+    <table>
+      <tr><th>Продукт</th><th>Ціна</th><th>Мова</th><th>AI</th></tr>
+      <tr><td><b>Okdesk</b></td><td>від ~$90/міс</td><td>є українська</td><td>Ні</td></tr>
+      <tr><td><b>Planado</b></td><td>від $4/користувач</td><td>EN / RU</td><td>Ні</td></tr>
+      <tr><td><b>HubEx</b></td><td>непрозоро</td><td>RU</td><td>Ні</td></tr>
+    </table>
+
+    <div class="callout"><b>Висновок:</b> україномовного AI-first рішення для виїзного сервісу фактично немає. Найсильніший головний «конкурент» більшості бізнесів — це досі Excel, телефон і месенджери. Перемагає той, хто швидко доведе вигоду.</div>
+  </section>
+
+  <!-- VERTICALS -->
+  <section class="panel" id="vt">
+    <h2>Вертикалі застосування</h2>
+    <p class="lead">Логіка «виконавець → виїзд → робота → оплата» повторюється в багатьох сферах. Оцінка нижче — наскільки кожна близька до архітектури платформи (10 = майже без переробок).</p>
+
+    <table>
+      <tr><th>Сфера</th><th>Близькість</th><th>Ринок UA</th><th>Коментар</th></tr>
+      <tr><td><b>🔧 Ремонт техніки</b></td><td><span class="pill p-hi">10/10</span></td><td>стагнує</td><td>Рідна сфера платформи — нуль переробок логіки</td></tr>
+      <tr><td><b>🌡️ HVAC / сантехніка / електрика</b></td><td><span class="pill p-hi">9/10</span></td><td>стійкий</td><td>Найбагатший сегмент, високі чеки, відбудова</td></tr>
+      <tr><td><b>🚛 Евакуатори / техдопомога</b></td><td><span class="pill p-hi">8/10</span></td><td>стабільний</td><td>Диспетчинг+карта — точний збіг логіки</td></tr>
+      <tr><td><b>💻 IT-виїзд (сисадміни)</b></td><td><span class="pill p-hi">8/10</span></td><td>нішевий</td><td>Близько до ремонту, B2B</td></tr>
+      <tr><td><b>🧹 Клінінг</b></td><td><span class="pill p-mid">7/10</span></td><td>росте</td><td>Зміщення в бік онлайн-бронювання</td></tr>
+      <tr><td><b>🏥 Догляд / медицина на дому</b></td><td><span class="pill p-mid">6/10</span></td><td>преміум</td><td>Найдорожчий, але регульований сегмент</td></tr>
+      <tr><td><b>🚗 Оренда авто</b></td><td><span class="pill p-lo">4/10</span></td><td>—</td><td>Інша логіка (не виїзний сервіс) — окремий продукт</td></tr>
+    </table>
+
+    <div class="callout">Один продукт здатний обслуговувати кілька сфер — за рахунок гнучкого налаштування під кожну (різні типи робіт, статуси, правила). Це і є основа для масштабування на нові ринки.</div>
+  </section>
+
+  <!-- AI -->
+  <section class="panel" id="ai">
+    <h2>Автоматизація та AI: куди і навіщо</h2>
+    <p class="lead">Сьогодні система фіксує дані. Наступний крок — навчити її діяти на їх основі: підказувати, розподіляти, попереджати. Більшість ефекту дають прості автоматизації; AI додає справжню диференціацію.</p>
+
+    <h3>⚡ Три рівні зрілості</h3>
+    <div class="flow">
+      <div class="step"><div class="n">РІВЕНЬ 1</div><h4>Автоматизація</h4><p>Правила «якщо → то». Дешево й швидко.</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">РІВЕНЬ 2</div><h4>AI-підказки</h4><p>Система радить — людина вирішує.</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">РІВЕНЬ 3</div><h4>Автономність</h4><p>Система діє сама, людина — на винятках.</p></div>
+    </div>
+
+    <h3>🧩 Що можна навісити на ключові модулі</h3>
+    <table>
+      <tr><th>Модуль</th><th>Що додати</th><th>Користь</th></tr>
+      <tr><td><b>Дошка диспетчера</b></td><td>AI-автопризначення виконавця, оптимізація маршрутів, ETA</td><td>Менше «зайвих виїздів» і відмов</td></tr>
+      <tr><td><b>Аналітика</b></td><td>AI-інсайти: «виручка впала — ось причина», прогноз, аномалії</td><td>Директор бачить причини, не лише цифри</td></tr>
+      <tr><td><b>Замовлення</b></td><td>Авто-оцінка вартості/тривалості, класифікація з опису, детект дублів</td><td>Швидше й точніше оформлення</td></tr>
+      <tr><td><b>Комунікації</b></td><td>Авто-SMS/Telegram клієнту: «майстер виїхав», «оцініть роботу»</td><td>Найдешевший «вау», ↑ лояльність</td></tr>
+      <tr><td><b>Прийом заявок</b></td><td>AI-бот (чат/голос) приймає заявки 24/7</td><td>Окреме джерело доходу (преміум-опція)</td></tr>
+      <tr><td><b>Інкасація / фінанси</b></td><td>Авто-звірка розривів, флаг підозрілих сум, OCR чеків</td><td>Контроль готівки, виявлення витоків</td></tr>
+      <tr><td><b>Майстри</b></td><td>AI-скоринг надійності, авто-розрахунок ЗП</td><td>Об'єктивна оцінка персоналу</td></tr>
+    </table>
+
+    <div class="callout"><b>Принцип AI під різні сфери:</b> один інтелектуальний движок, який налаштовується під кожну вертикаль (свої правила, дані, ваги) — а не окремий AI під кожну. Це робить рішення масштабованим.</div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="panel" id="ar">
+    <h2>Архітектура розвитку</h2>
+    <p class="lead">Щоб продукт можна було і допрацьовувати під конкретну компанію, і пропонувати іншим — потрібна уніфікація: спільне ядро + модулі, що вмикаються, + налаштування під сферу.</p>
+
+    <h3>🏗️ Принцип «ядро + модулі + налаштування»</h3>
+    <div class="grid g2">
+      <div class="card"><h4>🟦 Спільне ядро</h4><p>Замовлення, виконавці, диспетчинг, аналітика, ролі, AI-движок, білінг. Оновлюється централізовано для всіх.</p></div>
+      <div class="card"><h4>🟩 Модулі (вмикаються)</h4><p>Інкасація, графіки, карта, OCR, антифрод. Кожен клієнт отримує свій набір — як пакети.</p></div>
+      <div class="card"><h4>🟨 Пакети під сферу</h4><p>Ремонт / HVAC / евакуатори / клінінг — словники, статуси, правила. Нова сфера = налаштування, а не новий код.</p></div>
+      <div class="card"><h4>🟧 Кастом під клієнта</h4><p>Брендинг, особливі поля, інтеграції конкретної компанії — без зміни ядра.</p></div>
+    </div>
+
+    <h3>🔄 Шлях від закритої системи до масштабованого рішення</h3>
+    <div class="flow">
+      <div class="step"><div class="n">ЗАРАЗ</div><h4>Закрита система</h4><p>Одна компанія, моноліт</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">КРОК 1</div><h4>Уніфікація</h4><p>Модулі + налаштування під сфери</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">КРОК 2</div><h4>Рішення «під ключ»</h4><p>Окремі компанії під свій бренд</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">КРОК 3</div><h4>Підписка (SaaS)</h4><p>Багато клієнтів на одній платформі</p></div>
+    </div>
+
+    <div class="callout"><b>Що це дає вам:</b> повторюваний кастом, який роблять для одного клієнта, можна «підняти» в ядро і пропонувати всім. Так продукт зростає з кожним проєктом, а не множить різні версії.</div>
+
+    <h3>🔌 Інтеграції та вхід</h3>
+    <ul class="clean">
+      <li><b>Зручний вхід:</b> через Google / корпоративний акаунт (OAuth/SSO) — менше тертя, більше довіри в B2B.</li>
+      <li><b>Локальні інтеграції:</b> Нова Пошта, банк-виписки, РРО/чеки, КЕП/ЕДО, Telegram/Viber.</li>
+      <li><b>Під сферу:</b> евакуатори — страхові API та live-трекінг; HVAC — нагадування про обслуговування; клінінг — онлайн-бронювання.</li>
+    </ul>
+  </section>
+
+  <!-- DESIGN -->
+  <section class="panel" id="ds">
+    <h2>Дизайн та досвід користувача</h2>
+    <p class="lead">Сучасний вигляд — це не косметика, а сигнал «це надійний сучасний інструмент». Саме застарілий інтерфейс найчастіше асоціюється зі «старою системою».</p>
+
+    <div class="grid g2">
+      <div class="card"><h4>📊 Дашборд-first</h4><p>Головний екран — живі показники й AI-підказки, а не таблиця. Директор за 5 секунд бачить стан мережі.</p></div>
+      <div class="card"><h4>📱 Mobile-first для майстра</h4><p>Легкий застосунок: заявки, фото-звіти, статуси, геолокація. Це найбільший розрив у старих систем.</p></div>
+      <div class="card"><h4>🎨 Єдина дизайн-система</h4><p>Сучасні картки, темна тема за замовчуванням, читабельність — усі модулі виглядають однаково якісно.</p></div>
+      <div class="card"><h4>🇺🇦 Українізація</h4><p>Не просто переклад, а українські реалії: гривня, формати, локальні сервіси.</p></div>
+    </div>
+
+    <div class="callout">Оновлення дизайну можна робити поступово, модуль за модулем, не зупиняючи роботу системи — бекенд залишається, оновлюється «обличчя».</div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="panel" id="nx">
+    <h2>Наступні кроки для обговорення</h2>
+    <p class="lead">Вікторе, це не готовий план «згори», а основа для спільної розмови — куди рухати продукт і в якому форматі співпрацювати.</p>
+
+    <h3>🗣️ Що варто обговорити разом</h3>
+    <ul class="clean">
+      <li><b>Ваше бачення:</b> як ви самі бачите майбутнє платформи — лишити внутрішньою, покращувати, чи виводити на ринок?</li>
+      <li><b>Формат співпраці:</b> покращення поточної системи / спільний розвиток продукту / рішення для інших компаній.</li>
+      <li><b>Перші покращення:</b> з чого почати, щоб швидко відчути ефект (сповіщення, дизайн, AI-аналітика).</li>
+      <li><b>Метрики:</b> за якими показниками будемо вимірювати результат змін.</li>
+    </ul>
+
+    <h3>🚀 Логічна послідовність розвитку</h3>
+    <div class="flow">
+      <div class="step"><div class="n">ШВИДКІ ПЕРЕМОГИ</div><h4>Сповіщення + дизайн</h4><p>Малі зусилля, помітний ефект</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">ДИФЕРЕНЦІАЦІЯ</div><h4>AI-диспетчинг + аналітика</h4><p>Те, чого нема в конкурентів</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">МАСШТАБ</div><h4>Уніфікація + нові сфери</h4><p>Продукт для багатьох</p></div>
+    </div>
+
+    <div class="callout"><b>Найближчий технічний крок:</b> разом оцінити поточний код, щоб точно зрозуміти обсяг і складність кожного покращення — і вже на фактах планувати дорожню карту.</div>
+
+    <div class="card hl" style="margin-top:24px;text-align:center">
+      <h4 style="font-size:17px">Головна думка</h4>
+      <p style="font-size:15px;margin-top:6px">Вікторе, ви вже створили те, що інші будують роками — працюючий продукт із реальними даними. Питання не «з нуля чи ні», а «як розкрити його потенціал». Про це й пропоную поговорити.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Service CRM — аналіз ринку та бачення розвитку · Підготовлено для обговорення · 2026 · Конфіденційно
+</footer>
+
+<script>
+  const tabs=document.querySelectorAll('.tab');
+  const panels=document.querySelectorAll('.panel');
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.t).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
+</script>
+</body>
+</html>
