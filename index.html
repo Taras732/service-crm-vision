@@ -20,14 +20,14 @@
     -webkit-font-smoothing:antialiased;
   }
   .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-
-  /* SITE NAV (спільна для 3 сторінок) */
-  .sitenav{background:var(--bg2);border-bottom:1px solid var(--line)}
-  .sitenav .wrap{display:flex;gap:6px;padding:10px 20px;overflow-x:auto;scrollbar-width:none}
-  .sitenav .wrap::-webkit-scrollbar{display:none}
-  .sitenav a{white-space:nowrap;color:var(--muted);font-size:14px;font-weight:600;padding:8px 15px;border-radius:9px;text-decoration:none;transition:.18s}
-  .sitenav a:hover{color:var(--txt);background:var(--card)}
-  .sitenav a.active{color:#06121c;background:var(--grad)}
+  .for{font-size:12.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin:-2px 0 10px}
+  .ribbon{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--accent2);margin-bottom:6px}
+  .split{display:flex;align-items:center;justify-content:center;gap:18px;background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+  .split .half{text-align:center;flex:1}
+  .split .pct{font-size:26px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .split .lbl{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .split .x{color:var(--dim);font-size:18px;font-weight:700}
+  .price{color:#fff;font-weight:700;white-space:nowrap}
 
   /* HERO */
   header{
@@ -106,14 +106,6 @@
 </head>
 <body>
 
-<div class="sitenav">
-  <div class="wrap">
-    <a href="index.html" class="active">Бачення проєкту</a>
-    <a href="financial.html">Запуск і модель</a>
-    <a href="partnership.html">Партнерство</a>
-  </div>
-</div>
-
 <header>
   <div class="wrap">
     <div class="badge">Аналіз ринку · Бачення розвитку · 2026</div>
@@ -134,6 +126,8 @@
       <button class="tab" data-t="ar">Архітектура</button>
       <button class="tab" data-t="ds">Дизайн</button>
       <button class="tab" data-t="nx">Наступні кроки</button>
+      <button class="tab" data-t="rn">Запуск і модель</button>
+      <button class="tab" data-t="pt">Партнерство</button>
     </div>
   </div>
 </nav>
@@ -340,6 +334,171 @@
     </div>
   </section>
 
+  <!-- LAUNCH & MODEL -->
+  <section class="panel" id="rn">
+    <h2>Запуск і модель</h2>
+    <p class="lead">На чому заробляємо, як пакуємо й продаємо, і якими кроками виходимо на ринок. Робоча модель для спільного розуміння — цифри уточнимо після короткого аналізу платоспроможності українського ринку.</p>
+
+    <h3>🤝 Партнерство 50/50</h3>
+    <div class="split">
+      <div class="half"><div class="pct">50%</div><div class="lbl">Віктор · технічна частина</div></div>
+      <div class="x">×</div>
+      <div class="half"><div class="pct">50%</div><div class="lbl">Тарас · ринок і розвиток</div></div>
+    </div>
+    <div class="callout">Прибуток і витрати — порівну. Деталі засад — на вкладці «Партнерство».</div>
+
+    <h3>💡 На чому заробляємо</h3>
+    <div class="grid g2">
+      <div class="card hl"><h4>Готове рішення «під ключ» (разово)</h4><p>Продаємо встановлення системи компанії: налаштування, її бренд, навчання. Клієнт отримує «свою» систему — без щомісячної підписки. Найзрозуміліша для українського бізнесу модель і швидкі гроші вже зараз.</p></div>
+      <div class="card hl"><h4>Підтримка й оновлення (щороку)</h4><p>Невелика річна плата за підтримку, оновлення та хостинг. Це передбачуваний дохід, що накопичується з кожним клієнтом.</p></div>
+      <div class="card"><h4>Додаткові модулі (разово)</h4><p>Сповіщення клієнтам, мобільний застосунок майстра, AI-диспетчер, інтеграції. Кожен модуль — окремий продаж поверх базового.</p></div>
+      <div class="card"><h4>Підписка (пізніше)</h4><p>Коли продукт відточиться — додамо хмарну версію з помісячною оплатою для малих клієнтів. Наступний етап, не зараз.</p></div>
+    </div>
+    <div class="callout"><b>Рекомендований підхід — гібрид:</b> разовий продаж «під ключ» + невелика обовʼязкова річна підтримка. Так є і гроші сьогодні, і стабільний дохід завтра — без потреби одразу будувати складну хмарну інфраструктуру.</div>
+
+    <h3>📦 Три пакети — від простого до повного</h3>
+    <div class="grid g3">
+      <div class="card">
+        <h4>Старт</h4>
+        <div class="for">мала майстерня · 1–5 майстрів</div>
+        <ul class="clean">
+          <li>Приймання й облік замовлень</li>
+          <li>Диспетчинг на карті</li>
+          <li>Майстри й розрахунки</li>
+          <li>Базова аналітика · одне місто</li>
+        </ul>
+      </div>
+      <div class="card hl">
+        <div class="ribbon">★ Оптимальний</div>
+        <h4>Бізнес</h4>
+        <div class="for">мережа · 5–20 майстрів</div>
+        <ul class="clean">
+          <li>Усе зі «Старт»</li>
+          <li>Гроші: інкасація, витрати</li>
+          <li>Графіки змін · повна аналітика</li>
+          <li>Сповіщення клієнтам (SMS/Telegram)</li>
+          <li>Кілька міст і філій</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Про</h4>
+        <div class="for">велика мережа · 20–50+</div>
+        <ul class="clean">
+          <li>Усе з «Бізнес»</li>
+          <li>Мобільний застосунок майстра</li>
+          <li>AI-диспетчер (авторозподіл)</li>
+          <li>Інтеграції (Нова Пошта / банк / КЕП)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>💵 Орієнтовні ціни</h3>
+    <table>
+      <tr><th>Пакет (разово, «під ключ»)</th><th>Ціна</th></tr>
+      <tr><td><b>Старт</b></td><td class="price">$900 – 1 500</td></tr>
+      <tr><td><b>Бізнес</b></td><td class="price">$2 500 – 4 500</td></tr>
+      <tr><td><b>Про</b> (кастом)</td><td class="price">$6 000 – 12 000+</td></tr>
+    </table>
+    <table style="margin-top:16px">
+      <tr><th>Додаткові модулі та підтримка</th><th>Ціна</th></tr>
+      <tr><td>Сповіщення клієнтам (SMS/Telegram)</td><td class="price">$250 – 450</td></tr>
+      <tr><td>Мобільний застосунок майстра</td><td class="price">$1 200 – 2 500</td></tr>
+      <tr><td>AI-диспетчер</td><td class="price">$1 500 – 3 000</td></tr>
+      <tr><td>Інтеграція (за кожну)</td><td class="price">$300 – 800</td></tr>
+      <tr><td><b>Підтримка / оновлення / хостинг</b></td><td class="price">$50 – 150 / міс</td></tr>
+    </table>
+    <div class="callout">Цифри — робочі вилки для українського ринку. Фіналізуємо після короткого аналізу конкурентів.</div>
+
+    <h3>🎯 Як продаємо</h3>
+    <div class="grid g2">
+      <div class="card"><h4>Показуємо живу систему</h4><p>Не презентація, а робоча демонстрація з реальним сценарієм клієнта — він одразу бачить, як це працює для нього.</p></div>
+      <div class="card"><h4>Готове й перевірене</h4><p>Система вже працює на десятках тисяч замовлень. Це не концепт — це аргумент, якого немає в новачків.</p></div>
+      <div class="card"><h4>Показуємо «Про» — продаємо «Бізнес»</h4><p>Демонструємо повну версію з AI — на її тлі оптимальний пакет здається розумним вибором.</p></div>
+      <div class="card"><h4>Драбина доплат</h4><p>Зайшов на «Старт» → доріс → докупив сповіщення → мобільний → AI. Кожен крок клієнта — новий чек.</p></div>
+    </div>
+
+    <h3>🚀 Як рухаємось — крок за кроком</h3>
+    <div class="flow">
+      <div class="step"><div class="n">ГОТОВО</div><h4>Демо українською</h4><p>Перекладено, освіжено, піднято</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">ЗАРАЗ</div><h4>Майстерні ремонту</h4><p>Рідна ніша, перший клієнт</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">ДАЛІ</div><h4>Відточити процес</h4><p>Встановлення, навчання, підтримка</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">РОЗШИРЕННЯ</div><h4>Нові ніші</h4><p>Мийки, евакуатори, клінінг</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">МАСШТАБ</div><h4>Потік + хмара</h4><p>Підписка, автопідключення</p></div>
+    </div>
+
+    <div class="callout"><b>Один продукт — багато напрямків.</b> Починаємо з майстерень, доводимо до результату — і та сама система відкриває наступні ніші.</div>
+  </section>
+
+  <!-- PARTNERSHIP -->
+  <section class="panel" id="pt">
+    <h2>Партнерство — як я це бачу</h2>
+    <p class="lead">Чесно й по-партнерськи окреслюю умови, на яких рухаємось разом — щоб нам обом було спокійно і все зрозуміло. Усе нижче — попередній варіант, фінально закріпимо в партнерській угоді.</p>
+
+    <div class="callout"><b>Суть:</b> ти — серце технічної частини, я беру на себе все, щоб це продавалось і росло. Працюємо як рівні партнери — 50/50.</div>
+
+    <h3>🤝 Хто за що відповідає</h3>
+    <div class="grid g2">
+      <div class="card">
+        <h4>Віктор · технічна сторона</h4>
+        <ul class="clean">
+          <li>Розробка продукту</li>
+          <li>Супровід і підтримка</li>
+          <li>Технічна база й адаптації</li>
+          <li>Якість і стабільність</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Тарас · ринок і розвиток</h4>
+        <ul class="clean">
+          <li>Продаж і залучення клієнтів</li>
+          <li>Просування й маркетинг</li>
+          <li>Розвиток напрямків</li>
+          <li>Перемовини й партнерства</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>💰 Гроші — чесно й порівну</h3>
+    <div class="grid g3">
+      <div class="card"><h4>Прибуток і витрати — пополам</h4><p>І те, і інше ділимо 50/50: серверна й технічна частина, просування, реклама — залежно від потреби моменту.</p></div>
+      <div class="card"><h4>Дохід — через ФОП</h4><p>Оплати утримуються через ФОП, далі кошти перерозподіляються між нами за домовленістю.</p></div>
+      <div class="card"><h4>Облік — відкритий</h4><p>Простий спільний облік у таблиці: видно кожне надходження й витрату. Жодних «чорних скриньок».</p></div>
+    </div>
+    <div class="split">
+      <div class="half"><div class="pct">50%</div><div class="lbl">Віктор</div></div>
+      <div class="x">×</div>
+      <div class="half"><div class="pct">50%</div><div class="lbl">Тарас</div></div>
+    </div>
+
+    <h3>🌱 Як ми зростатимемо</h3>
+    <div class="flow">
+      <div class="step"><div class="n">ЗАРАЗ</div><h4>Проста співпраця</h4><p>Партнери-ФОП, домовленості в угоді</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">КОЛИ ПІДУТЬ ЗАМОВЛЕННЯ</div><h4>Окремий рахунок</h4><p>Фінанси справи — чисті й окремі</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">КОЛИ СТАБІЛЬНО</div><h4>Спільне ТОВ 50/50</h4><p>Повноцінний спільний актив</p></div>
+    </div>
+
+    <h3>🛡️ Що буде зафіксовано письмово</h3>
+    <ul class="clean">
+      <li><b>Частки 50/50</b> — і що саме ми ділимо</li>
+      <li><b>Ролі кожного</b> — хто за що відповідає</li>
+      <li><b>Права на продукт</b> і все, що створюємо разом</li>
+      <li><b>Розподіл доходу й витрат</b></li>
+      <li><b>Як діємо при виході</b> одного з партнерів — чесно для обох</li>
+      <li><b>Конфіденційність</b></li>
+    </ul>
+
+    <div class="card hl" style="margin-top:24px;text-align:center">
+      <h4 style="font-size:17px">Будуємо це надовго — і по-чесному 🤝</h4>
+      <p style="font-size:15px;margin-top:6px">Якщо щось хочеш додати, прибрати чи змінити — кажи. Мені важливо, щоб умови були комфортні нам обом, а не лише на папері.</p>
+    </div>
+  </section>
+
 </main>
 
 <footer class="wrap">
@@ -349,13 +508,21 @@
 <script>
   const tabs=document.querySelectorAll('.tab');
   const panels=document.querySelectorAll('.panel');
-  tabs.forEach(t=>t.addEventListener('click',()=>{
+  function activate(id){
+    const tab=document.querySelector('.tab[data-t="'+id+'"]');
+    if(!tab)return;
     tabs.forEach(x=>x.classList.remove('active'));
     panels.forEach(p=>p.classList.remove('active'));
-    t.classList.add('active');
-    document.getElementById(t.dataset.t).classList.add('active');
+    tab.classList.add('active');
+    document.getElementById(id).classList.add('active');
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    activate(t.dataset.t);
+    history.replaceState(null,'','#'+t.dataset.t);
     window.scrollTo({top:0,behavior:'smooth'});
   }));
+  const h=location.hash.replace('#','');
+  if(h&&document.getElementById(h))activate(h);
 </script>
 </body>
 </html>
