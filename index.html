@@ -41,9 +41,17 @@
   header p{color:var(--muted);font-size:17px;max-width:640px;margin:0 auto}
   .meta{margin-top:18px;font-size:13px;color:var(--dim)}
 
-  /* TABS */
-  nav{position:sticky;top:0;z-index:50;background:rgba(13,17,23,.85);backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--line)}
+  /* TOP-LEVEL VIEW NAV (3 головні вкладки) */
+  .topnav{position:sticky;top:0;z-index:60;background:rgba(13,17,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .topnav .wrap{display:flex;gap:6px;padding:11px 20px;overflow-x:auto;scrollbar-width:none}
+  .topnav .wrap::-webkit-scrollbar{display:none}
+  .navbtn{white-space:nowrap;background:transparent;border:1px solid transparent;color:var(--muted);font-size:14.5px;font-weight:700;padding:9px 16px;border-radius:9px;cursor:pointer;transition:.18s;font-family:inherit}
+  .navbtn:hover{color:var(--txt);background:var(--card)}
+  .navbtn.active{color:#06121c;background:var(--grad)}
+  .view{display:none} .view.active{display:block}
+
+  /* SUB TABS (всередині «Бачення») */
+  nav{background:var(--bg2);border-bottom:1px solid var(--line)}
   .tabs{display:flex;gap:4px;overflow-x:auto;padding:10px 0;scrollbar-width:none}
   .tabs::-webkit-scrollbar{display:none}
   .tab{white-space:nowrap;background:transparent;border:1px solid transparent;color:var(--muted);
@@ -115,6 +123,16 @@
   </div>
 </header>
 
+<div class="topnav">
+  <div class="wrap">
+    <button class="navbtn active" data-v="v-vision">Бачення проєкту</button>
+    <button class="navbtn" data-v="v-partner">Партнерство</button>
+    <button class="navbtn" data-v="v-launch">Запуск і модель</button>
+  </div>
+</div>
+
+<div class="view active" id="v-vision">
+
 <nav>
   <div class="wrap">
     <div class="tabs" id="tabs">
@@ -126,8 +144,6 @@
       <button class="tab" data-t="ar">Архітектура</button>
       <button class="tab" data-t="ds">Дизайн</button>
       <button class="tab" data-t="nx">Наступні кроки</button>
-      <button class="tab" data-t="rn">Запуск і модель</button>
-      <button class="tab" data-t="pt">Партнерство</button>
     </div>
   </div>
 </nav>
@@ -334,8 +350,12 @@
     </div>
   </section>
 
-  <!-- LAUNCH & MODEL -->
-  <section class="panel" id="rn">
+  </main>
+  </div><!-- /v-vision -->
+
+  <div class="view" id="v-launch">
+  <main class="wrap">
+  <section class="panel active" id="rn">
     <h2>Запуск і модель</h2>
     <p class="lead">На чому заробляємо, як пакуємо й продаємо, і якими кроками виходимо на ринок. Робоча модель для спільного розуміння — цифри уточнимо після короткого аналізу платоспроможності українського ринку.</p>
 
@@ -433,8 +453,12 @@
     <div class="callout"><b>Один продукт — багато напрямків.</b> Починаємо з майстерень, доводимо до результату — і та сама система відкриває наступні ніші.</div>
   </section>
 
-  <!-- PARTNERSHIP -->
-  <section class="panel" id="pt">
+  </main>
+  </div><!-- /v-launch -->
+
+  <div class="view" id="v-partner">
+  <main class="wrap">
+  <section class="panel active" id="pt">
     <h2>Партнерство — як я це бачу</h2>
     <p class="lead">Чесно й по-партнерськи окреслюю умови, на яких рухаємось разом — щоб нам обом було спокійно і все зрозуміло. Усе нижче — попередній варіант, фінально закріпимо в партнерській угоді.</p>
 
@@ -500,29 +524,44 @@
   </section>
 
 </main>
+</div><!-- /v-partner -->
 
 <footer class="wrap">
   Service CRM — аналіз ринку та бачення розвитку · Підготовлено для обговорення · 2026 · Конфіденційно
 </footer>
 
 <script>
-  const tabs=document.querySelectorAll('.tab');
-  const panels=document.querySelectorAll('.panel');
-  function activate(id){
-    const tab=document.querySelector('.tab[data-t="'+id+'"]');
-    if(!tab)return;
-    tabs.forEach(x=>x.classList.remove('active'));
-    panels.forEach(p=>p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(id).classList.add('active');
+  // головні розділи (3 вкладки)
+  const navbtns=document.querySelectorAll('.navbtn');
+  const views=document.querySelectorAll('.view');
+  function showView(vid){
+    const btn=document.querySelector('.navbtn[data-v="'+vid+'"]');
+    if(!btn)return;
+    navbtns.forEach(x=>x.classList.remove('active'));
+    views.forEach(v=>v.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(vid).classList.add('active');
   }
-  tabs.forEach(t=>t.addEventListener('click',()=>{
-    activate(t.dataset.t);
-    history.replaceState(null,'','#'+t.dataset.t);
+  navbtns.forEach(b=>b.addEventListener('click',()=>{
+    showView(b.dataset.v);
     window.scrollTo({top:0,behavior:'smooth'});
   }));
+
+  // суб-вкладки всередині «Бачення»
+  const tabs=document.querySelectorAll('#v-vision .tab');
+  const panels=document.querySelectorAll('#v-vision .panel');
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.t).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
+
+  // редіректи зі старих адрес: #rn → Запуск, #pt → Партнерство
   const h=location.hash.replace('#','');
-  if(h&&document.getElementById(h))activate(h);
+  if(h==='rn')showView('v-launch');
+  else if(h==='pt')showView('v-partner');
 </script>
 </body>
 </html>
