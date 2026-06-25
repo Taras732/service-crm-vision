@@ -20,6 +20,14 @@
   }
   .wrap{max-width:760px;margin:0 auto;padding:0 22px}
 
+  /* SITE NAV (спільна для 3 сторінок) */
+  .sitenav{position:sticky;top:0;z-index:60;background:rgba(14,17,22,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .sitenav .wrap{display:flex;gap:6px;padding:10px 22px;overflow-x:auto;scrollbar-width:none}
+  .sitenav .wrap::-webkit-scrollbar{display:none}
+  .sitenav a{white-space:nowrap;color:var(--muted);font-size:14px;font-weight:600;padding:8px 15px;border-radius:9px;text-decoration:none;border:1px solid transparent;transition:.18s}
+  .sitenav a:hover{color:var(--txt);background:var(--card)}
+  .sitenav a.active{color:#06121c;background:var(--grad)}
+
   header{
     text-align:center;padding:60px 0 34px;
     background:radial-gradient(900px 360px at 50% -120px,rgba(110,231,183,.13),transparent),var(--bg2);
@@ -95,6 +103,14 @@
 </style>
 </head>
 <body>
+
+<div class="sitenav">
+  <div class="wrap">
+    <a href="index.html">Бачення проєкту</a>
+    <a href="financial.html">Запуск і модель</a>
+    <a href="partnership.html" class="active">Партнерство</a>
+  </div>
+</div>
 
 <header>
   <div class="wrap">
